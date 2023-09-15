@@ -41,14 +41,14 @@ class _BMICalculatorState extends State<BMICalculator> {
                 ),
                 TextField(
                   controller: weightController,
-                  decoration:
-                      InputDecoration(label: Text("Enter your weight(in kgs)")),
+                  decoration: InputDecoration(
+                      label: Text(" Enter your weight(in kgs)")),
                   keyboardType: TextInputType.number,
                 ),
                 TextField(
                   controller: heightController,
                   decoration: InputDecoration(
-                      label: Text("Enter your height(in meters)")),
+                      label: Text(" Enter your height(in meters)")),
                   keyboardType: TextInputType.number,
                 ),
                 SizedBox(
@@ -75,11 +75,11 @@ class _BMICalculatorState extends State<BMICalculator> {
                         }
                         setState(() {
                           result =
-                              "$msg \n\nYour BMI is: ${BMI.toStringAsFixed(2)}";
+                              " $msg \n\n Your BMI is: ${BMI.toStringAsFixed(2)}";
                         });
                       } else {
                         setState(() {
-                          result = "Please fill all the required blanks!!";
+                          result = " Please fill all the required blanks!!";
                         });
                       }
                     });
