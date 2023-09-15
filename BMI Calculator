@@ -1,0 +1,93 @@
+import 'package:flutter/material.dart';
+import "dart:math";
+
+void main() {
+  runApp(BMICalculator());
+}
+
+class BMICalculator extends StatefulWidget {
+  @override
+  _BMICalculatorState createState() => _BMICalculatorState();
+}
+
+class _BMICalculatorState extends State<BMICalculator> {
+  var weightController = TextEditingController();
+  var heightController = TextEditingController();
+  var result = "";
+  var msg = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Flutter Title',
+        home: Scaffold(
+            appBar: AppBar(
+              title: const Text('BMI INDEX APP'),
+              centerTitle: true,
+            ),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  width: 300,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ),
+                  child: Text("Calculate Your BMI",
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.w500)),
+                ),
+                TextField(
+                  controller: weightController,
+                  decoration:
+                      InputDecoration(label: Text("Enter your weight(in kgs)")),
+                  keyboardType: TextInputType.number,
+                ),
+                TextField(
+                  controller: heightController,
+                  decoration: InputDecoration(
+                      label: Text("Enter your height(in meters)")),
+                  keyboardType: TextInputType.number,
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      var weight = weightController.text.toString();
+                      var height = heightController.text.toString();
+                      if (weight != "" && height != "") {
+                        var intweight = double.parse(weight);
+                        var intheight = double.parse(height);
+                        var BMI = intweight / (intheight * intheight);
+
+                        if (BMI < 18.5) {
+                          msg = 'Underweight';
+                        } else if (BMI < 25) {
+                          msg = 'Normal weight';
+                        } else if (BMI < 30) {
+                          msg = 'Overweight';
+                        } else {
+                          msg = 'Obese';
+                        }
+                        setState(() {
+                          result =
+                              "$msg \n\nYour BMI is: ${BMI.toStringAsFixed(2)}";
+                        });
+                      } else {
+                        setState(() {
+                          result = "Please fill all the required blanks!!";
+                        });
+                      }
+                    });
+                  },
+                  child: Text("Calculate"),
+                ),
+                Text(result, style: TextStyle(fontSize: 20)),
+              ],
+            )));
+  }
+}
